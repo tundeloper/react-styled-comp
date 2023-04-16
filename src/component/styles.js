@@ -1,3 +1,4 @@
+import { css } from "styled-components";
 export const setColor = {
   primaryColor: "#af9a7d",
   mainWhite: "#fff",
@@ -33,7 +34,7 @@ export const setBorder = ({
   style = "solid",
   color = "black",
 } = {}) => {
-  return `border:${width} ${style} ${color}`;
+  return `border: ${width} ${style}  ${color};`;
 };
 
 export const sizes = {
@@ -42,6 +43,16 @@ export const sizes = {
   tablet: 768,
   phone: 576,
 };
+
+export const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (min-width: ${sizes / 16}em) {
+      ${css(...args)}
+    }
+  `;
+
+  return acc;
+}, {});
 
 export const setTransition = ({
   property = "all",
